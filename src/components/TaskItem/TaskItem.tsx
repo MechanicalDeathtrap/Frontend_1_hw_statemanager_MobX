@@ -1,4 +1,4 @@
-import {useTodoListStore} from "../StateStoragies/ZustandTaskStorage.tsx";
+import {useTodoListStore} from "../../StateStorage/ZustandTaskStorage.tsx";
 import style from "./TaskItem.module.sass"
 
 function TaskItem(){

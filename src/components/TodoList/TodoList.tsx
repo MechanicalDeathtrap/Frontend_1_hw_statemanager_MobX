@@ -1,8 +1,8 @@
 import style from "./TodoList.module.sass"
 import { CreateTaskType} from "./FunctionsTypes.ts";
-import {useTodoListStore} from "../StateStoragies/ZustandTaskStorage.tsx";
+import {useTodoListStore} from "../../StateStorage/ZustandTaskStorage.tsx";
 import {useEffect, useState} from "react";
-import {TodoItem} from "../StateStoragies/TodoItemType.ts";
+import {TodoItem} from "../../StateStorage/TodoItemType.ts";
 import TaskItem from "../TaskItem/TaskItem.tsx";
 
 /*const DeleteTask: DeleteTaskType = (id) => {

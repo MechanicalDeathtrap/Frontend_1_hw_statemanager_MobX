@@ -25,7 +25,4 @@ export const useTodoListStore  = create<TodoStore>((set) =>({
         }))
     }
 }))
-/*
-export const useTodoListStore<TodoStore> = create((set) =>({}
 
-));*/

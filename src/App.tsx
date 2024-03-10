@@ -1,6 +1,6 @@
 import style from "./App.module.sass"
-import Header from "./Header/Header.tsx";
-import TodoList from "./TodoList/TodoList.tsx"
+import Header from "./components/Header/Header.tsx";
+import TodoList from "./components/TodoList/TodoList.tsx"
 
 function App() {
 
