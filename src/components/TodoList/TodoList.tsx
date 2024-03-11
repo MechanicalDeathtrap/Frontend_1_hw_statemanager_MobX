@@ -3,12 +3,13 @@ import { CreateTaskType} from "./FunctionsTypes.ts";
 import {  useState} from "react";
 import {TodoItem} from "../../StateStorage/TodoItemType.ts";
 import TaskItem from "../TaskItem/TaskItem.tsx";
-import {observer} from "mobx-react-lite";
-import {todoTasksStore} from "../../StateStorage/TaskStorage.ts";
+import { useDispatch} from "react-redux";
+import {addTodo } from "../../StateStorage/TodosListSlice.ts"
 
-const TodoList = observer(() =>{
+const TodoList = () =>{
 
     const [todoText, setTodoText] = useState('')
+    const dispatch = useDispatch()
 
     const DayCounter = () =>{
         const weekDay :number = (new Date).getDay();
@@ -25,11 +26,11 @@ const TodoList = observer(() =>{
     }
 
     const CreateTask: CreateTaskType = (text) => {
-        todoTasksStore.addTodo({
+        dispatch(addTodo({
             id: Math.random()*100000,
             text: text,
             isCompleted: false
-        } as TodoItem)
+        } as TodoItem))
     }
 
     return(
@@ -54,6 +55,6 @@ const TodoList = observer(() =>{
             </div>
         </div>
     )
-})
+}
 
 export default TodoList
