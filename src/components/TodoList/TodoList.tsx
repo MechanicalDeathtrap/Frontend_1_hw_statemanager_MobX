@@ -1,21 +1,14 @@
 import style from "./TodoList.module.sass"
 import { CreateTaskType} from "./FunctionsTypes.ts";
-import {useTodoListStore} from "../../StateStorage/ZustandTaskStorage.tsx";
-import {useEffect, useState} from "react";
+import {  useState} from "react";
 import {TodoItem} from "../../StateStorage/TodoItemType.ts";
 import TaskItem from "../TaskItem/TaskItem.tsx";
+import {observer} from "mobx-react-lite";
+import {todoTasksStore} from "../../StateStorage/TaskStorage.ts";
 
-/*const DeleteTask: DeleteTaskType = (id) => {
-    const {removeTodo} = useTodoListStore();
-    removeTodo(id);
-}*/
-
-
-
-function TodoList(){
+const TodoList = observer(() =>{
 
     const [todoText, setTodoText] = useState('')
-    const {addTodo, todos} = useTodoListStore();
 
     const DayCounter = () =>{
         const weekDay :number = (new Date).getDay();
@@ -32,16 +25,12 @@ function TodoList(){
     }
 
     const CreateTask: CreateTaskType = (text) => {
-        addTodo({
+        todoTasksStore.addTodo({
             id: Math.random()*100000,
             text: text,
             isCompleted: false
         } as TodoItem)
     }
-
-    useEffect(() => {
-        console.log(todos);
-    }, [])
 
     return(
         <div className={style.mainPageContent}>
@@ -65,6 +54,6 @@ function TodoList(){
             </div>
         </div>
     )
-}
+})
 
 export default TodoList
