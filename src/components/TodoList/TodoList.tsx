@@ -3,13 +3,12 @@ import { CreateTaskType} from "./FunctionsTypes.ts";
 import {  useState} from "react";
 import {TodoItem} from "../../StateStorage/TodoItemType.ts";
 import TaskItem from "../TaskItem/TaskItem.tsx";
-import { useDispatch} from "react-redux";
-import {addTodo } from "../../StateStorage/TodosListSlice.ts"
+import {observer} from "mobx-react-lite";
+import {todoTasksStore} from "../../StateStorage/TaskStorage.ts";
 
-const TodoList = () =>{
+const TodoList = observer(() =>{
 
     const [todoText, setTodoText] = useState('')
-    const dispatch = useDispatch()
 
     const DayCounter = () =>{
         const weekDay :number = (new Date).getDay();
@@ -26,11 +25,11 @@ const TodoList = () =>{
     }
 
     const CreateTask: CreateTaskType = (text) => {
-        dispatch(addTodo({
+        todoTasksStore.addTodo({
             id: Math.random()*100000,
             text: text,
             isCompleted: false
-        } as TodoItem))
+        } as TodoItem)
     }
 
     return(
@@ -43,11 +42,11 @@ const TodoList = () =>{
                 <form action="" className={style.form}>
                     <input type="text" className={style.formInput} placeholder="I need to..."
                            id="input" onChange={(e) => setTodoText(e.target.value)}/>
-                        <button type="button" className={style.inputButton}
-                                onClick={() => {
-                                    todoText.length ? CreateTask(todoText) : ''
-                                }
-                        }>Add</button>
+                    <button type="button" className={style.inputButton}
+                            onClick={() => {
+                                todoText.length ? CreateTask(todoText) : ''
+                            }
+                            }>Add</button>
                 </form>
                 <ul className={style.todoList} id="todo-list">
                     <TaskItem/>
@@ -55,6 +54,6 @@ const TodoList = () =>{
             </div>
         </div>
     )
-}
+})
 
 export default TodoList
